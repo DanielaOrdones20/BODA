@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bodas de Oro - Audias y Gloria</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <script>
@@ -56,151 +56,222 @@
         @keyframes shine {
             to { background-position: 200% center; }
         }
-        .photo-frame {
+
+        .big-slider {
             position: relative;
-            padding: 15px;
-            background: white;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            transform: rotate(-2deg);
-            transition: transform 0.3s ease;
-        }
-        .photo-frame:nth-child(even) {
-            transform: rotate(2deg);
-        }
-        .photo-frame:hover {
-            transform: rotate(0deg) scale(1.02);
-        }
-        .user-photo {
-            filter: sepia(0.15) contrast(1.1) brightness(1.05);
             width: 100%;
-            height: 500px;
-            object-fit: cover;
+            height: 70vh;
+            overflow: hidden;
+            background-color: #000;
+        }
+        .slide {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out, transform 8s ease-out;
+            background-size: cover;
+            background-position: center;
+            transform: scale(1.1);
+        }
+        .slide.active {
+            opacity: 1;
+            transform: scale(1);
+        }
+        .slide-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, rgba(255,255,255,0.2) 0%, transparent 20%, transparent 80%, rgba(255,255,255,0.2) 100%);
+        }
+
+        #petals-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+            overflow: hidden;
+        }
+        .petal {
+            position: absolute;
+            background-color: #fce4ec;
+            border-radius: 150% 0 150% 0;
+            opacity: 0.7;
+            animation: fall linear infinite;
+        }
+        @keyframes fall {
+            0% { transform: translateY(-10vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.8; }
+            90% { opacity: 0.8; }
+            100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+        }
+
+        .heart-beat {
+            animation: heartBeat 2s infinite;
+        }
+        @keyframes heartBeat {
+            0% { transform: scale(1); }
+            14% { transform: scale(1.1); }
+            28% { transform: scale(1); }
+            42% { transform: scale(1.1); }
+            70% { transform: scale(1); }
+        }
+
+        .gold-line {
+            height: 1px;
+            width: 100px;
+            background: linear-gradient(to right, transparent, #D4AF37, transparent);
+        }
+
+        .countdown-item {
+            min-width: 80px;
         }
     </style>
 </head>
-<body class="bg-earth-bg text-earth-dark font-body">
+<body class="bg-earth-bg text-earth-dark font-body relative">
 
-    <!-- Navegación -->
-    <nav class="fixed w-full z-50 bg-white/90 backdrop-blur-md border-b border-stone-200">
-        <div class="max-w-5xl mx-auto px-6 py-4 flex justify-between items-center">
-            <span class="font-classic text-lg tracking-widest text-gold-bright font-bold">A & G</span>
-            <div class="hidden md:flex space-x-8 font-classic text-xs tracking-tighter uppercase text-stone-600">
-                <a href="#inicio" class="hover:text-earth-terracotta transition">Inicio</a>
-                <a href="#mensaje" class="hover:text-earth-terracotta transition">Mensaje</a>
-                <a href="#nuestra-union" class="hover:text-earth-terracotta transition">Nosotros</a>
-                <a href="#evento" class="hover:text-earth-terracotta transition">Detalles</a>
-                <a href="#regalo" class="hover:text-earth-terracotta transition">Lluvia de Sobres</a>
-                <a href="#confirmar" class="bg-earth-dark text-white px-4 py-2 rounded-full hover:bg-earth-terracotta transition">Confirmar</a>
-            </div>
-        </div>
-    </nav>
+    <div id="petals-container"></div>
 
-    <!-- Sección Hero (Portada) -->
+    <!-- Hero (Sin menú arriba) -->
     <section id="inicio" class="h-screen flex items-center justify-center relative overflow-hidden hero-bg">
         <div class="text-center text-white px-4 z-10 flex flex-col items-center">
-            <div class="font-classic text-[10rem] md:text-[16rem] leading-none gold-shimmer drop-shadow-2xl font-bold mb-0">
-                50
+            <div class="font-classic text-[8rem] md:text-[14rem] leading-none gold-shimmer drop-shadow-2xl font-bold">50</div>
+            <div class="flex flex-col items-center -mt-4 mb-8">
+                <div class="gold-line mb-2"></div>
+                <p class="font-classic text-lg md:text-2xl tracking-[0.4em] uppercase text-gold-bright font-bold">Años de Matrimonio</p>
+                <div class="gold-line mt-2"></div>
             </div>
-            <h2 class="font-classic text-3xl md:text-6xl tracking-[0.3em] uppercase mb-8 border-b-2 border-gold-bright pb-2">
-                Bodas de Oro
-            </h2>
-            <div class="space-y-2">
-                <h1 class="font-script text-5xl md:text-8xl text-soft-cream">Audias Ordoñez</h1>
-                <p class="font-serif italic text-2xl md:text-4xl text-gold-bright">&</p>
-                <h1 class="font-script text-5xl md:text-8xl text-soft-cream">Gloria Rosero</h1>
+            <h2 class="font-classic text-xl md:text-4xl tracking-[0.3em] uppercase mb-10 text-soft-cream font-bold">Bodas de Oro</h2>
+            <div class="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-8">
+                <h1 class="font-script text-5xl md:text-8xl text-soft-cream whitespace-nowrap">Audias Ordoñez</h1>
+                <p class="font-serif italic text-3xl md:text-5xl text-gold-bright">&</p>
+                <h1 class="font-script text-5xl md:text-8xl text-soft-cream whitespace-nowrap">Gloria Rosero</h1>
             </div>
-        </div>
-        <div class="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce text-gold-bright text-2xl">
-            <i class="fa-solid fa-chevron-down"></i>
         </div>
     </section>
 
-    <!-- Sección: Mensaje y Versículo -->
-    <section id="mensaje" class="py-20 px-6 bg-white relative overflow-hidden">
-        <div class="absolute top-0 right-0 w-32 h-64 bg-earth-sand opacity-10 rounded-l-full"></div>
-        
+    <!-- Temporizador -->
+    <section class="py-12 bg-white flex justify-center border-b border-stone-100">
+        <div class="max-w-4xl w-full px-6 reveal">
+            <div class="text-center mb-6">
+                <p class="font-classic text-xs tracking-[0.3em] uppercase text-stone-400">Contando los días para celebrar</p>
+            </div>
+            <div id="countdown" class="flex justify-center gap-4 md:gap-8">
+                <div class="countdown-item text-center">
+                    <span id="days" class="block text-3xl md:text-5xl font-classic text-earth-terracotta font-bold">00</span>
+                    <span class="text-[10px] uppercase tracking-widest text-stone-500">Días</span>
+                </div>
+                <div class="text-3xl text-gold-bright opacity-30 mt-1">:</div>
+                <div class="countdown-item text-center">
+                    <span id="hours" class="block text-3xl md:text-5xl font-classic text-earth-terracotta font-bold">00</span>
+                    <span class="text-[10px] uppercase tracking-widest text-stone-500">Horas</span>
+                </div>
+                <div class="text-3xl text-gold-bright opacity-30 mt-1">:</div>
+                <div class="countdown-item text-center">
+                    <span id="minutes" class="block text-3xl md:text-5xl font-classic text-earth-terracotta font-bold">00</span>
+                    <span class="text-[10px] uppercase tracking-widest text-stone-500">Minutos</span>
+                </div>
+                <div class="text-3xl text-gold-bright opacity-30 mt-1">:</div>
+                <div class="countdown-item text-center">
+                    <span id="seconds" class="block text-3xl md:text-5xl font-classic text-earth-terracotta font-bold">00</span>
+                    <span class="text-[10px] uppercase tracking-widest text-stone-500">Segundos</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Camino de Fe -->
+    <section id="camino" class="pt-24 pb-12 px-6 bg-white relative overflow-hidden">
         <div class="max-w-3xl mx-auto text-center reveal">
-            <i class="fa-solid fa-quote-left text-earth-terracotta text-4xl mb-6 opacity-30"></i>
-            <h3 class="font-classic text-2xl text-earth-dark mb-6 tracking-widest uppercase">Un Camino de Fe</h3>
-            <p class="font-serif text-xl md:text-2xl text-stone-600 leading-relaxed mb-10">
-                Con la bendición de Dios, hemos caminado juntos durante 50 años, construyendo un hogar sobre la roca firme de Su amor. Queremos compartir con ustedes esta inmensa alegría.
+            <div class="flex flex-col items-center mb-10">
+                <i class="fa-solid fa-heart text-4xl text-gold-bright heart-beat mb-4"></i>
+                <h3 class="font-classic text-3xl text-earth-dark tracking-[0.2em] uppercase font-bold">Un Camino de Fe</h3>
+                <div class="h-1 w-16 bg-gold-bright mt-4"></div>
+            </div>
+            <p class="font-serif text-xl md:text-2xl text-stone-600 leading-relaxed mb-6">
+                Con la bendición de Dios, hemos caminado juntos durante 50 años llenos de fe y bendicionesque han marcado nuestro camino.
             </p>
-            
-            <div class="bg-earth-bg p-8 rounded-2xl border-l-4 border-gold-bright shadow-sm italic">
-                <p class="font-serif text-2xl text-earth-dark mb-4 leading-relaxed">
+            <p class="font-serif text-xl md:text-2xl text-stone-600 leading-relaxed">
+                Hoy, nuestra alegría no estaría completa sin ustedes; los invitamos a celebrar este día tan especial.
+            </p>
+        </div>
+    </section>
+
+    <!-- Slider -->
+    <section class="big-slider shadow-2xl">
+        <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');">
+            <div class="slide-overlay"></div>
+        </div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1469334031218-e382a71b716b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');">
+            <div class="slide-overlay"></div>
+        </div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');">
+            <div class="slide-overlay"></div>
+        </div>
+
+        <button onclick="changeSlide(-1)" class="absolute left-6 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/40 text-white w-12 h-12 rounded-full backdrop-blur-sm transition z-20">
+            <i class="fa-solid fa-chevron-left"></i>
+        </button>
+        <button onclick="changeSlide(1)" class="absolute right-6 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/40 text-white w-12 h-12 rounded-full backdrop-blur-sm transition z-20">
+            <i class="fa-solid fa-chevron-right"></i>
+        </button>
+    </section>
+
+    <!-- Versículo -->
+    <section class="py-20 px-6 bg-soft-cream">
+        <div class="max-w-3xl mx-auto text-center reveal">
+            <div class="bg-white p-12 rounded-3xl border border-stone-100 shadow-xl relative">
+                <i class="fa-solid fa-quote-left text-earth-terracotta text-3xl mb-6 opacity-30"></i>
+                <p class="font-serif text-2xl md:text-3xl text-earth-dark mb-6 leading-relaxed italic px-4">
                     "Las muchas aguas no podrán apagar el amor, ni lo ahogarán los ríos."
                 </p>
-                <p class="font-classic text-sm tracking-widest text-earth-terracotta uppercase">Cantares 8:7</p>
+                <div class="flex items-center justify-center gap-4">
+                    <div class="h-[1px] w-8 bg-gold-bright"></div>
+                    <p class="font-classic text-sm tracking-[0.3em] text-earth-terracotta uppercase font-bold">Cantares 8:7</p>
+                    <div class="h-[1px] w-8 bg-gold-bright"></div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Sección: Las Dos Fotos Especiales -->
-    <section id="nuestra-union" class="py-20 px-6 bg-soft-cream overflow-hidden">
-        <div class="max-w-6xl mx-auto text-center mb-16 reveal">
-            <h2 class="font-classic text-3xl text-earth-dark uppercase tracking-widest">Nuestra Unión</h2>
-            <div class="h-1 w-20 bg-gold-bright mx-auto mt-4"></div>
-        </div>
-        
-        <div class="max-w-5xl mx-auto flex flex-col md:flex-row gap-12 items-center justify-center px-4">
-            <!-- Foto 1 -->
-            <div class="reveal photo-frame w-full md:w-1/2">
-                <img src="https://files.oaiusercontent.com/file-K1kO5p0n2rL9jXpY1e2m3q4r" alt="Audias y Gloria bajo el arco" class="user-photo rounded-sm">
-                <p class="mt-4 font-script text-3xl text-earth-terracotta text-center">Medio siglo de felicidad</p>
-            </div>
-            
-            <!-- Foto 2 -->
-            <div class="reveal photo-frame w-full md:w-1/2" style="transition-delay: 200ms;">
-                <img src="https://files.oaiusercontent.com/file-7d8af118-00ef-4052-99e1-b815b982d36b" alt="Audias y Gloria caminando juntos" class="user-photo rounded-sm">
-                <p class="mt-4 font-script text-3xl text-earth-terracotta text-center">Caminando de la mano</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- El Evento -->
+    <!-- Detalles del Evento -->
     <section id="evento" class="py-20 bg-white border-y border-stone-200">
         <div class="max-w-5xl mx-auto px-6">
             <div class="text-center mb-16 reveal">
-                <h2 class="font-classic text-3xl text-earth-dark uppercase tracking-widest">Detalles del Encuentro</h2>
+                <h2 class="font-classic text-2xl text-earth-dark uppercase tracking-widest font-bold">Información de la Gala</h2>
                 <div class="h-1 w-20 bg-gold-bright mx-auto mt-4"></div>
             </div>
             
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-                <!-- Fecha -->
-                <div class="bg-earth-bg p-8 rounded-xl shadow-md reveal border-b-4 border-gold-bright">
+                <div class="bg-earth-bg p-8 rounded-xl reveal border-b-4 border-gold-bright hover:shadow-lg transition">
                     <i class="fa-regular fa-calendar-check text-4xl text-earth-terracotta mb-4"></i>
-                    <h4 class="font-classic text-lg font-bold mb-2">FECHA</h4>
-                    <p class="font-serif text-2xl text-earth-dark">Viernes, 27 de Marzo</p>
-                    <p class="text-stone-500 font-bold">Año 2026</p>
+                    <h4 class="font-classic text-lg font-bold mb-2 tracking-widest uppercase">Fecha</h4>
+                    <p class="font-serif text-2xl text-earth-dark font-bold">Viernes, 27 de Marzo</p>
+                    <p class="text-stone-500 font-bold uppercase text-[10px] mt-1">2026</p>
                 </div>
-
-                <!-- Hora -->
-                <div class="bg-earth-bg p-8 rounded-xl shadow-md reveal border-b-4 border-earth-terracotta" style="transition-delay: 200ms;">
+                <div class="bg-earth-bg p-8 rounded-xl reveal border-b-4 border-earth-terracotta hover:shadow-lg transition">
                     <i class="fa-regular fa-clock text-4xl text-earth-terracotta mb-4"></i>
-                    <h4 class="font-classic text-lg font-bold mb-2">HORA</h4>
-                    <p class="font-serif text-2xl text-earth-dark">7:00 PM</p>
-                    <p class="text-stone-500">Encuentro de gala</p>
+                    <h4 class="font-classic text-lg font-bold mb-2 tracking-widest uppercase">Hora</h4>
+                    <p class="font-serif text-2xl text-earth-dark font-bold">7:00 PM</p>
+                    <p class="text-stone-500 uppercase text-[10px] font-bold mt-1">Gala de Celebración</p>
                 </div>
-
-                <!-- Lugar -->
-                <div class="bg-earth-bg p-8 rounded-xl shadow-md reveal border-b-4 border-earth-sand" style="transition-delay: 400ms;">
+                <div class="bg-earth-bg p-8 rounded-xl reveal border-b-4 border-earth-sand hover:shadow-lg transition">
                     <i class="fa-solid fa-location-dot text-4xl text-earth-terracotta mb-4"></i>
-                    <h4 class="font-classic text-lg font-bold mb-2">LUGAR</h4>
+                    <h4 class="font-classic text-lg font-bold mb-2 tracking-widest uppercase">Lugar</h4>
                     <p class="font-serif text-xl text-earth-dark font-bold">IPUC Sede Central</p>
-                    <p class="text-stone-500">La Hormiga, Putumayo</p>
-                    <a href="https://maps.app.goo.gl/bs88vfj9EPqqym1D7" target="_blank" class="mt-4 inline-block text-earth-terracotta font-bold hover:underline tracking-widest text-xs uppercase">Ver Ubicación</a>
+                    <p class="text-stone-500 text-xs mt-1">La Hormiga, Putumayo</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Lluvia de Sobres -->
-    <section id="regalo" class="py-20 px-6 bg-soft-cream">
-        <div class="max-w-2xl mx-auto text-center reveal">
-            <div class="bg-white p-12 rounded-3xl border-2 border-dashed border-earth-sand relative shadow-sm">
-                <i class="fa-solid fa-envelope-open-text text-5xl text-gold-bright mb-6"></i>
-                <h2 class="font-classic text-3xl text-earth-dark mb-0 uppercase tracking-widest font-bold">Lluvia de Sobres</h2>
-            </div>
+    <!-- Sección Lluvia de Sobres -->
+    <section class="py-16 bg-white flex flex-col items-center border-b border-stone-100">
+        <div class="max-w-xl mx-auto text-center reveal">
+            <i class="fa-solid fa-envelope-open-text text-4xl text-gold-bright mb-4 opacity-80"></i>
+            <h2 class="font-classic text-2xl text-earth-dark tracking-[0.3em] uppercase font-bold text-center">LLUVIA DE SOBRES</h2>
+            <div class="h-[1px] w-24 bg-gold-bright mx-auto mt-4"></div>
         </div>
     </section>
 
@@ -208,37 +279,97 @@
     <section id="confirmar" class="py-24 px-6 text-center bg-earth-dark text-white relative">
         <div class="max-w-2xl mx-auto reveal z-10 relative">
             <h2 class="font-script text-7xl text-gold-bright mb-6">¡Los Esperamos!</h2>
-            <p class="font-serif text-xl text-soft-cream/80 mb-10">Será un honor compartir este testimonio de amor y fidelidad con ustedes.</p>
+            <p class="font-serif text-xl text-soft-cream/80 mb-10 leading-relaxed">Será un honor compartir este testimonio de fidelidad con nuestros seres queridos.</p>
             
             <a href="https://wa.me/tunúmero" class="inline-flex items-center gap-3 bg-gold-bright text-earth-dark px-12 py-5 rounded-full text-lg font-classic hover:bg-white transition shadow-xl transform hover:-translate-y-1 font-bold tracking-widest uppercase">
                 <i class="fa-brands fa-whatsapp text-2xl"></i>
-                Confirmar por WhatsApp
+                Confirmar Asistencia
             </a>
-            <p class="mt-6 text-xs uppercase tracking-[0.2em] text-white/50">Límite de confirmación: 10 de marzo</p>
+            <p class="mt-8 text-[10px] uppercase tracking-[0.3em] text-white/40 italic">Límite de confirmación: 10 de marzo</p>
         </div>
     </section>
 
-    <!-- Footer -->
     <footer class="py-12 bg-white text-center border-t border-stone-200">
         <p class="font-classic text-gold-bright tracking-[0.5em] mb-4 text-sm font-bold uppercase">Audias & Gloria</p>
-        <p class="font-serif text-stone-400 italic mb-2">1976 — 2026</p>
-        <p class="text-[10px] text-stone-400 font-body uppercase tracking-widest">Bodas de Oro</p>
+        <div class="h-[1px] w-12 bg-stone-200 mx-auto mb-4"></div>
+        <p class="font-serif text-stone-400 italic text-sm">Cincuenta Años</p>
+        <p class="text-[9px] text-stone-400 font-body uppercase tracking-[0.4em] mt-4 opacity-50">1976 — 2026</p>
     </footer>
 
     <script>
+        // --- Countdown Logic ---
+        const eventDate = new Date("March 27, 2026 19:00:00").getTime();
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = eventDate - now;
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            if (document.getElementById("days")) {
+                document.getElementById("days").innerText = days < 10 ? "0" + days : days;
+                document.getElementById("hours").innerText = hours < 10 ? "0" + hours : hours;
+                document.getElementById("minutes").innerText = minutes < 10 ? "0" + minutes : minutes;
+                document.getElementById("seconds").innerText = seconds < 10 ? "0" + seconds : seconds;
+            }
+
+            if (distance < 0) {
+                clearInterval(countdownInterval);
+                document.getElementById("countdown").innerHTML = "<p class='font-classic text-gold-bright uppercase tracking-widest'>¡Es hoy!</p>";
+            }
+        }
+
+        const countdownInterval = setInterval(updateCountdown, 1000);
+        updateCountdown();
+
+        // --- Slider Logic ---
+        let slideIndex = 0;
+        const slides = document.querySelectorAll(".slide");
+
+        function changeSlide(n) {
+            slides[slideIndex].classList.remove('active');
+            slideIndex = (slideIndex + n + slides.length) % slides.length;
+            slides[slideIndex].classList.add('active');
+        }
+
+        setInterval(() => { changeSlide(1); }, 6000);
+
+        // --- Reveal animation ---
         function reveal() {
             var reveals = document.querySelectorAll(".reveal");
             for (var i = 0; i < reveals.length; i++) {
                 var windowHeight = window.innerHeight;
                 var elementTop = reveals[i].getBoundingClientRect().top;
-                var elementVisible = 100;
-                if (elementTop < windowHeight - elementVisible) {
+                if (elementTop < windowHeight - 100) {
                     reveals[i].classList.add("active");
                 }
             }
         }
         window.addEventListener("scroll", reveal);
-        window.onload = reveal;
+
+        // --- Petal animation ---
+        function createPetal() {
+            const container = document.getElementById('petals-container');
+            if(!container) return;
+            const petal = document.createElement('div');
+            petal.classList.add('petal');
+            const size = Math.random() * 12 + 8 + 'px';
+            petal.style.width = size;
+            petal.style.height = size;
+            petal.style.left = Math.random() * 100 + 'vw';
+            petal.style.animationDuration = Math.random() * 5 + 7 + 's';
+            petal.style.backgroundColor = ['#fce4ec', '#fff9f0', '#ffffff'][Math.floor(Math.random()*3)];
+            container.appendChild(petal);
+            setTimeout(() => { petal.remove(); }, 12000);
+        }
+
+        window.onload = function() {
+            reveal();
+            setInterval(createPetal, 800);
+        };
     </script>
 </body>
 </html>

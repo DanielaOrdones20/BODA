@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bodas de Oro - Audias y Gloria</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'earth-bg': '#F9F6F2',
+                        'earth-dark': '#3D342F',
+                        'earth-terracotta': '#B06D50',
+                        'earth-sand': '#D2B48C',
+                        'gold-bright': '#D4AF37',
+                        'soft-cream': '#FCFBF9'
+                    },
+                    fontFamily: {
+                        'script': ['"Great Vibes"', 'cursive'],
+                        'serif': ['"Playfair Display"', 'serif'],
+                        'classic': ['"Cinzel"', 'serif'],
+                        'body': ['"Lato"', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .hero-bg {
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1529636798458-92182e662485?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 1s ease-out;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .gold-shimmer {
+            background: linear-gradient(to right, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            background-size: 200% auto;
+            animation: shine 4s linear infinite;
+        }
+        @keyframes shine {
+            to { background-position: 200% center; }
+        }
+    </style>
+</head>
+<body class="bg-earth-bg text-earth-dark font-body">
+
+    <!-- Navegación -->
+    <nav class="fixed w-full z-50 bg-white/90 backdrop-blur-md border-b border-stone-200">
+        <div class="max-w-5xl mx-auto px-6 py-4 flex justify-between items-center">
+            <span class="font-classic text-lg tracking-widest text-gold-bright font-bold">A & G</span>
+            <div class="hidden md:flex space-x-8 font-classic text-xs tracking-tighter uppercase text-stone-600">
+                <a href="#inicio" class="hover:text-earth-terracotta transition">Inicio</a>
+                <a href="#mensaje" class="hover:text-earth-terracotta transition">Mensaje</a>
+                <a href="#evento" class="hover:text-earth-terracotta transition">Detalles</a>
+                <a href="#regalo" class="hover:text-earth-terracotta transition">Lluvia de Sobres</a>
+                <a href="#confirmar" class="bg-earth-dark text-white px-4 py-2 rounded-full hover:bg-earth-terracotta transition">Confirmar</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Sección Hero (Portada) -->
+    <section id="inicio" class="h-screen flex items-center justify-center relative overflow-hidden hero-bg">
+        <div class="text-center text-white px-4 z-10 flex flex-col items-center">
+            <!-- 50 Grande Dorado -->
+            <div class="font-classic text-[10rem] md:text-[16rem] leading-none gold-shimmer drop-shadow-2xl font-bold mb-0">
+                50
+            </div>
+            <!-- Bodas de Oro Grande -->
+            <h2 class="font-classic text-3xl md:text-6xl tracking-[0.3em] uppercase mb-8 border-b-2 border-gold-bright pb-2">
+                Bodas de Oro
+            </h2>
+            <!-- Nombres de los Esposos -->
+            <div class="space-y-2">
+                <h1 class="font-script text-5xl md:text-8xl text-soft-cream">Audias Ordoñez</h1>
+                <p class="font-serif italic text-2xl md:text-4xl text-gold-bright">&</p>
+                <h1 class="font-script text-5xl md:text-8xl text-soft-cream">Gloria Rosero</h1>
+            </div>
+        </div>
+        <div class="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce text-gold-bright text-2xl">
+            <i class="fa-solid fa-chevron-down"></i>
+        </div>
+    </section>
+
+    <!-- Sección: Mensaje y Versículo -->
+    <section id="mensaje" class="py-20 px-6 bg-white relative overflow-hidden">
+        <!-- Decoración lateral -->
+        <div class="absolute top-0 right-0 w-32 h-64 bg-earth-sand opacity-10 rounded-l-full"></div>
+        
+        <div class="max-w-3xl mx-auto text-center reveal">
+            <i class="fa-solid fa-quote-left text-earth-terracotta text-4xl mb-6 opacity-30"></i>
+            <h3 class="font-classic text-2xl text-earth-dark mb-6 tracking-widest">NUESTRA GRATITUD</h3>
+            <p class="font-serif text-xl md:text-2xl text-stone-600 leading-relaxed mb-10">
+                Con la bendición de Dios, hemos caminado juntos durante 50 años, construyendo un hogar sobre la roca firme de Su amor. Queremos compartir con ustedes esta inmensa alegría.
+            </p>
+            
+            <!-- Versículo Bíblico -->
+            <div class="bg-earth-bg p-8 rounded-2xl border-l-4 border-gold-bright shadow-sm italic">
+                <p class="font-serif text-2xl text-earth-dark mb-4">
+                    "Hasta aquí nos ayudó Jehová."
+                </p>
+                <p class="font-classic text-sm tracking-widest text-earth-terracotta">1 Samuel 7:12</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- El Evento -->
+    <section id="evento" class="py-20 bg-soft-cream border-y border-stone-200">
+        <div class="max-w-5xl mx-auto px-6">
+            <div class="text-center mb-16 reveal">
+                <h2 class="font-classic text-3xl text-earth-dark">Celebración</h2>
+                <div class="h-1 w-20 bg-gold-bright mx-auto mt-4"></div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Fecha -->
+                <div class="bg-white p-8 rounded-xl shadow-md text-center reveal border-b-4 border-gold-bright">
+                    <i class="fa-regular fa-calendar-check text-4xl text-earth-terracotta mb-4"></i>
+                    <h4 class="font-classic text-lg font-bold mb-2">FECHA</h4>
+                    <p class="font-serif text-2xl text-earth-dark">Viernes, 27 de Marzo</p>
+                    <p class="text-stone-500">Año 2026</p>
+                </div>
+
+                <!-- Hora -->
+                <div class="bg-white p-8 rounded-xl shadow-md text-center reveal border-b-4 border-earth-terracotta" style="transition-delay: 200ms;">
+                    <i class="fa-regular fa-clock text-4xl text-earth-terracotta mb-4"></i>
+                    <h4 class="font-classic text-lg font-bold mb-2">HORA</h4>
+                    <p class="font-serif text-2xl text-earth-dark">7:00 PM</p>
+                    <p class="text-stone-500">Encuentro de gala</p>
+                </div>
+
+                <!-- Lugar -->
+                <div class="bg-white p-8 rounded-xl shadow-md text-center reveal border-b-4 border-earth-sand" style="transition-delay: 400ms;">
+                    <i class="fa-solid fa-location-dot text-4xl text-earth-terracotta mb-4"></i>
+                    <h4 class="font-classic text-lg font-bold mb-2">LUGAR</h4>
+                    <p class="font-serif text-xl text-earth-dark font-bold">IPUC Sede Central</p>
+                    <p class="text-stone-500">La Hormiga, Putumayo</p>
+                    <a href="https://maps.google.com" target="_blank" class="mt-4 inline-block text-earth-terracotta font-bold hover:underline">Ver en el mapa</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lluvia de Sobres -->
+    <section id="regalo" class="py-20 px-6 bg-white">
+        <div class="max-w-2xl mx-auto text-center reveal">
+            <div class="bg-earth-bg p-12 rounded-3xl border-2 border-dashed border-earth-sand relative">
+                <i class="fa-solid fa-envelope-open-text text-5xl text-gold-bright mb-6"></i>
+                <h2 class="font-classic text-3xl text-earth-dark mb-6">Lluvia de Sobres</h2>
+                <p class="font-serif text-lg text-stone-600 mb-0 leading-relaxed">
+                    Nuestra mayor felicidad es contar con su presencia en esta fecha tan importante. Si desean tener un detalle con nosotros, contaremos con una urna para **lluvia de sobres** en la entrada del salón.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Confirmación -->
+    <section id="confirmar" class="py-24 px-6 text-center bg-earth-dark text-white relative">
+        <div class="max-w-2xl mx-auto reveal z-10 relative">
+            <h2 class="font-script text-7xl text-gold-bright mb-6">¡Acompáñanos!</h2>
+            <p class="font-serif text-xl text-soft-cream/80 mb-10">Esperamos compartir con ustedes este inolvidable testimonio de fidelidad.</p>
+            
+            <a href="https://wa.me/tunúmero" class="inline-flex items-center gap-3 bg-gold-bright text-earth-dark px-12 py-5 rounded-full text-lg font-classic hover:bg-white transition shadow-xl transform hover:-translate-y-1 font-bold">
+                <i class="fa-brands fa-whatsapp text-2xl"></i>
+                CONFIRMAR ASISTENCIA
+            </a>
+            <p class="mt-6 text-xs uppercase tracking-[0.2em] text-white/50">Por favor confirmar antes del 10 de marzo</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 bg-soft-cream text-center border-t border-stone-200">
+        <p class="font-classic text-gold-bright tracking-[0.5em] mb-4 text-sm font-bold">AUDIAS & GLORIA</p>
+        <p class="font-serif text-stone-400 italic mb-2">50 años de amor y bendición</p>
+        <p class="text-[10px] text-stone-400 font-body uppercase tracking-widest">27 de Marzo, 2026</p>
+    </footer>
+
+    <script>
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 100;
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                }
+            } 
+        }
+        window.addEventListener("scroll", reveal);
+        window.onload = reveal;
+    </script>
+</body>
+</html>
+        window.onload = reveal;
+    </script>
+</body>
+</html>

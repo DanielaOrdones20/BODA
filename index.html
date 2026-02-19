@@ -32,14 +32,14 @@
     </script>
     <style>
         .hero-bg {
-            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1529636798458-92182e662485?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1529636798458-92182e662485?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
             background-size: cover;
             background-position: center;
         }
         .reveal {
             opacity: 0;
-            transform: translateY(30px);
-            transition: all 1s ease-out;
+            transform: translateY(20px);
+            transition: all 0.8s ease-out;
         }
         .reveal.active {
             opacity: 1;
@@ -60,9 +60,12 @@
         .big-slider {
             position: relative;
             width: 100%;
-            height: 70vh;
+            height: 50vh; /* Ajustado para móvil */
             overflow: hidden;
             background-color: #000;
+        }
+        @media (min-width: 768px) {
+            .big-slider { height: 70vh; }
         }
         .slide {
             position: absolute;
@@ -80,7 +83,7 @@
         .slide-overlay {
             position: absolute;
             inset: 0;
-            background: linear-gradient(to bottom, rgba(255,255,255,0.2) 0%, transparent 20%, transparent 80%, rgba(255,255,255,0.2) 100%);
+            background: linear-gradient(to bottom, rgba(0,0,0,0.2), transparent, rgba(0,0,0,0.2));
         }
 
         #petals-container {
@@ -97,13 +100,13 @@
             position: absolute;
             background-color: #fce4ec;
             border-radius: 150% 0 150% 0;
-            opacity: 0.7;
+            opacity: 0.6;
             animation: fall linear infinite;
         }
         @keyframes fall {
             0% { transform: translateY(-10vh) rotate(0deg); opacity: 0; }
-            10% { opacity: 0.8; }
-            90% { opacity: 0.8; }
+            10% { opacity: 0.7; }
+            90% { opacity: 0.7; }
             100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
         }
 
@@ -120,86 +123,87 @@
 
         .gold-line {
             height: 1px;
-            width: 100px;
+            width: 80px;
             background: linear-gradient(to right, transparent, #D4AF37, transparent);
         }
 
         .countdown-item {
-            min-width: 80px;
+            min-width: 65px;
         }
     </style>
 </head>
-<body class="bg-earth-bg text-earth-dark font-body relative">
+<body class="bg-earth-bg text-earth-dark font-body relative overflow-x-hidden">
 
     <div id="petals-container"></div>
 
-    <!-- Hero (Sin menú arriba) -->
-    <section id="inicio" class="h-screen flex items-center justify-center relative overflow-hidden hero-bg">
-        <div class="text-center text-white px-4 z-10 flex flex-col items-center">
-            <div class="font-classic text-[8rem] md:text-[14rem] leading-none gold-shimmer drop-shadow-2xl font-bold">50</div>
-            <div class="flex flex-col items-center -mt-4 mb-8">
+    <!-- Hero -->
+    <section id="inicio" class="h-screen flex items-center justify-center relative overflow-hidden hero-bg px-4">
+        <div class="text-center text-white z-10 flex flex-col items-center w-full">
+            <div class="font-classic text-[6.5rem] md:text-[12rem] leading-none gold-shimmer drop-shadow-2xl font-bold">50</div>
+            <div class="flex flex-col items-center -mt-2 mb-6">
                 <div class="gold-line mb-2"></div>
-                <p class="font-classic text-lg md:text-2xl tracking-[0.4em] uppercase text-gold-bright font-bold">Años de Matrimonio</p>
+                <p class="font-classic text-sm md:text-xl tracking-[0.3em] uppercase text-gold-bright font-bold">Años de Matrimonio</p>
                 <div class="gold-line mt-2"></div>
             </div>
-            <h2 class="font-classic text-xl md:text-4xl tracking-[0.3em] uppercase mb-10 text-soft-cream font-bold">Bodas de Oro</h2>
-            <div class="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-8">
-                <h1 class="font-script text-5xl md:text-8xl text-soft-cream whitespace-nowrap">Audias Ordoñez</h1>
-                <p class="font-serif italic text-3xl md:text-5xl text-gold-bright">&</p>
-                <h1 class="font-script text-5xl md:text-8xl text-soft-cream whitespace-nowrap">Gloria Rosero</h1>
+            <h2 class="font-classic text-lg md:text-3xl tracking-[0.2em] uppercase mb-8 text-soft-cream/90 font-bold">Bodas de Oro</h2>
+            
+            <div class="flex flex-col items-center justify-center gap-2 md:gap-6 w-full">
+                <h1 class="font-script text-5xl md:text-7xl text-soft-cream leading-tight">Audias Ordoñez</h1>
+                <p class="font-serif italic text-2xl md:text-4xl text-gold-bright">&</p>
+                <h1 class="font-script text-5xl md:text-7xl text-soft-cream leading-tight">Gloria Rosero</h1>
             </div>
         </div>
     </section>
 
     <!-- Temporizador -->
-    <section class="py-12 bg-white flex justify-center border-b border-stone-100">
-        <div class="max-w-4xl w-full px-6 reveal">
+    <section class="py-10 bg-white flex justify-center border-b border-stone-100 px-4">
+        <div class="max-w-4xl w-full reveal">
             <div class="text-center mb-6">
-                <p class="font-classic text-xs tracking-[0.3em] uppercase text-stone-400">Contando los días para celebrar</p>
+                <p class="font-classic text-[10px] tracking-[0.2em] uppercase text-stone-400 font-bold">Contando los días para celebrar</p>
             </div>
-            <div id="countdown" class="flex justify-center gap-4 md:gap-8">
+            <div id="countdown" class="flex justify-center items-start gap-2 md:gap-6">
                 <div class="countdown-item text-center">
                     <span id="days" class="block text-3xl md:text-5xl font-classic text-earth-terracotta font-bold">00</span>
-                    <span class="text-[10px] uppercase tracking-widest text-stone-500">Días</span>
+                    <span class="text-[9px] uppercase tracking-widest text-stone-500 font-bold">Días</span>
                 </div>
-                <div class="text-3xl text-gold-bright opacity-30 mt-1">:</div>
+                <div class="text-xl text-gold-bright opacity-30 mt-1">:</div>
                 <div class="countdown-item text-center">
                     <span id="hours" class="block text-3xl md:text-5xl font-classic text-earth-terracotta font-bold">00</span>
-                    <span class="text-[10px] uppercase tracking-widest text-stone-500">Horas</span>
+                    <span class="text-[9px] uppercase tracking-widest text-stone-500 font-bold">Horas</span>
                 </div>
-                <div class="text-3xl text-gold-bright opacity-30 mt-1">:</div>
+                <div class="text-xl text-gold-bright opacity-30 mt-1">:</div>
                 <div class="countdown-item text-center">
                     <span id="minutes" class="block text-3xl md:text-5xl font-classic text-earth-terracotta font-bold">00</span>
-                    <span class="text-[10px] uppercase tracking-widest text-stone-500">Minutos</span>
+                    <span class="text-[9px] uppercase tracking-widest text-stone-500 font-bold">Min</span>
                 </div>
-                <div class="text-3xl text-gold-bright opacity-30 mt-1">:</div>
+                <div class="text-xl text-gold-bright opacity-30 mt-1">:</div>
                 <div class="countdown-item text-center">
                     <span id="seconds" class="block text-3xl md:text-5xl font-classic text-earth-terracotta font-bold">00</span>
-                    <span class="text-[10px] uppercase tracking-widest text-stone-500">Segundos</span>
+                    <span class="text-[9px] uppercase tracking-widest text-stone-500 font-bold">Seg</span>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Camino de Fe -->
-    <section id="camino" class="pt-24 pb-12 px-6 bg-white relative overflow-hidden">
-        <div class="max-w-3xl mx-auto text-center reveal">
-            <div class="flex flex-col items-center mb-10">
-                <i class="fa-solid fa-heart text-4xl text-gold-bright heart-beat mb-4"></i>
-                <h3 class="font-classic text-3xl text-earth-dark tracking-[0.2em] uppercase font-bold">Un Camino de Fe</h3>
-                <div class="h-1 w-16 bg-gold-bright mt-4"></div>
+    <section id="camino" class="py-16 px-6 bg-white text-center">
+        <div class="max-w-2xl mx-auto reveal">
+            <div class="flex flex-col items-center mb-8">
+                <i class="fa-solid fa-heart text-3xl text-gold-bright heart-beat mb-3"></i>
+                <h3 class="font-classic text-xl md:text-2xl text-earth-dark tracking-[0.2em] uppercase font-bold">Un Camino de Fe</h3>
+                <div class="h-1 w-12 bg-gold-bright mt-3"></div>
             </div>
-            <p class="font-serif text-xl md:text-2xl text-stone-600 leading-relaxed mb-6">
-                Con la bendición de Dios, hemos caminado juntos durante 50 años llenos de fe y bendiciones que han marcado nuestro camino.
+            <p class="font-serif text-lg md:text-2xl text-stone-600 leading-relaxed mb-6 italic">
+                "Con la bendición de Dios, hemos caminado juntos durante 50 años llenos de fe y bendiciones han marcado nuestro camino."
             </p>
-            <p class="font-serif text-xl md:text-2xl text-stone-600 leading-relaxed">
-                Hoy, nuestra alegría no estaría completa sin ustedes; los invitamos a celebrar este día tan especial.
+            <p class="font-body text-base text-stone-500 leading-relaxed">
+                Hoy, nuestra alegría no estaría completa sin ustedes; los invitamos a celebrar la fidelidad del Señor en nuestro hogar.
             </p>
         </div>
     </section>
 
     <!-- Slider -->
-    <section class="big-slider shadow-2xl">
+    <section class="big-slider">
         <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');">
             <div class="slide-overlay"></div>
         </div>
@@ -210,165 +214,170 @@
             <div class="slide-overlay"></div>
         </div>
 
-        <button onclick="changeSlide(-1)" class="absolute left-6 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/40 text-white w-12 h-12 rounded-full backdrop-blur-sm transition z-20">
-            <i class="fa-solid fa-chevron-left"></i>
+        <!-- Controles más amigables para móvil -->
+        <button onclick="changeSlide(-1)" class="absolute left-3 top-1/2 -translate-y-1/2 bg-white/30 text-white w-10 h-10 rounded-full backdrop-blur-md z-20 flex items-center justify-center">
+            <i class="fa-solid fa-chevron-left text-sm"></i>
         </button>
-        <button onclick="changeSlide(1)" class="absolute right-6 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/40 text-white w-12 h-12 rounded-full backdrop-blur-sm transition z-20">
-            <i class="fa-solid fa-chevron-right"></i>
+        <button onclick="changeSlide(1)" class="absolute right-3 top-1/2 -translate-y-1/2 bg-white/30 text-white w-10 h-10 rounded-full backdrop-blur-md z-20 flex items-center justify-center">
+            <i class="fa-solid fa-chevron-right text-sm"></i>
         </button>
     </section>
 
     <!-- Versículo -->
-    <section class="py-20 px-6 bg-soft-cream">
-        <div class="max-w-3xl mx-auto text-center reveal">
-            <div class="bg-white p-12 rounded-3xl border border-stone-100 shadow-xl relative">
-                <i class="fa-solid fa-quote-left text-earth-terracotta text-3xl mb-6 opacity-30"></i>
-                <p class="font-serif text-2xl md:text-3xl text-earth-dark mb-6 leading-relaxed italic px-4">
+    <section class="py-16 px-6 bg-soft-cream">
+        <div class="max-w-xl mx-auto text-center reveal">
+            <div class="bg-white p-8 md:p-12 rounded-2xl shadow-sm border border-stone-100">
+                <i class="fa-solid fa-quote-left text-gold-bright text-2xl mb-4 opacity-40"></i>
+                <p class="font-serif text-xl md:text-2xl text-earth-dark mb-6 leading-relaxed italic">
                     "Las muchas aguas no podrán apagar el amor, ni lo ahogarán los ríos."
                 </p>
-                <div class="flex items-center justify-center gap-4">
-                    <div class="h-[1px] w-8 bg-gold-bright"></div>
-                    <p class="font-classic text-sm tracking-[0.3em] text-earth-terracotta uppercase font-bold">Cantares 8:7</p>
-                    <div class="h-[1px] w-8 bg-gold-bright"></div>
-                </div>
+                <p class="font-classic text-xs tracking-[0.2em] text-earth-terracotta uppercase font-bold">— Cantares 8:7 —</p>
             </div>
         </div>
     </section>
 
     <!-- Detalles del Evento -->
-    <section id="evento" class="py-20 bg-white border-y border-stone-200">
-        <div class="max-w-5xl mx-auto px-6">
-            <div class="text-center mb-16 reveal">
-                <h2 class="font-classic text-2xl text-earth-dark uppercase tracking-widest font-bold">Información de la Gala</h2>
-                <div class="h-1 w-20 bg-gold-bright mx-auto mt-4"></div>
+    <section id="evento" class="py-16 bg-white px-6">
+        <div class="max-w-5xl mx-auto">
+            <div class="text-center mb-12 reveal">
+                <h2 class="font-classic text-xl text-earth-dark uppercase tracking-widest font-bold">Información de la Gala</h2>
+                <div class="h-1 w-16 bg-gold-bright mx-auto mt-3"></div>
             </div>
             
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-                <div class="bg-earth-bg p-8 rounded-xl reveal border-b-4 border-gold-bright hover:shadow-lg transition">
-                    <i class="fa-regular fa-calendar-check text-4xl text-earth-terracotta mb-4"></i>
-                    <h4 class="font-classic text-lg font-bold mb-2 tracking-widest uppercase">Fecha</h4>
-                    <p class="font-serif text-2xl text-earth-dark font-bold">Viernes, 27 de Marzo</p>
-                    <p class="text-stone-500 font-bold uppercase text-[10px] mt-1">2026</p>
+            <div class="grid grid-cols-1 gap-6">
+                <!-- Fecha -->
+                <div class="bg-earth-bg p-6 rounded-xl reveal flex items-center gap-5 border-l-4 border-gold-bright">
+                    <div class="bg-white w-12 h-12 rounded-full flex items-center justify-center text-gold-bright shadow-sm shrink-0">
+                        <i class="fa-regular fa-calendar-check text-xl"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-classic text-[10px] font-bold tracking-widest uppercase text-stone-500">Fecha</h4>
+                        <p class="font-serif text-lg text-earth-dark font-bold">Viernes, 27 de Marzo, 2026</p>
+                    </div>
                 </div>
-                <div class="bg-earth-bg p-8 rounded-xl reveal border-b-4 border-earth-terracotta hover:shadow-lg transition">
-                    <i class="fa-regular fa-clock text-4xl text-earth-terracotta mb-4"></i>
-                    <h4 class="font-classic text-lg font-bold mb-2 tracking-widest uppercase">Hora</h4>
-                    <p class="font-serif text-2xl text-earth-dark font-bold">7:00 PM</p>
-                    <p class="text-stone-500 uppercase text-[10px] font-bold mt-1">Gala de Celebración</p>
+
+                <!-- Hora -->
+                <div class="bg-earth-bg p-6 rounded-xl reveal flex items-center gap-5 border-l-4 border-earth-terracotta">
+                    <div class="bg-white w-12 h-12 rounded-full flex items-center justify-center text-earth-terracotta shadow-sm shrink-0">
+                        <i class="fa-regular fa-clock text-xl"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-classic text-[10px] font-bold tracking-widest uppercase text-stone-500">Hora de Recepción</h4>
+                        <p class="font-serif text-lg text-earth-dark font-bold">07:00 PM</p>
+                    </div>
                 </div>
-                <div class="bg-earth-bg p-8 rounded-xl reveal border-b-4 border-earth-sand hover:shadow-lg transition">
-                    <i class="fa-solid fa-location-dot text-4xl text-earth-terracotta mb-4"></i>
-                    <h4 class="font-classic text-lg font-bold mb-2 tracking-widest uppercase">Lugar</h4>
-                    <p class="font-serif text-xl text-earth-dark font-bold">IPUC Sede Central</p>
-                    <p class="text-stone-500 text-xs mt-1">La Hormiga, Putumayo</p>
+
+                <!-- Lugar -->
+                <div class="bg-earth-bg p-6 rounded-xl reveal flex items-center gap-5 border-l-4 border-earth-sand">
+                    <div class="bg-white w-12 h-12 rounded-full flex items-center justify-center text-earth-sand shadow-sm shrink-0">
+                        <i class="fa-solid fa-location-dot text-xl"></i>
+                    </div>
+                    <div class="flex-grow">
+                        <h4 class="font-classic text-[10px] font-bold tracking-widest uppercase text-stone-500">Lugar</h4>
+                        <p class="font-serif text-lg text-earth-dark font-bold leading-tight">IPUC Sede Central</p>
+                        <p class="text-stone-500 text-xs mt-1">La Hormiga, Putumayo</p>
+                        <a href="https://maps.app.goo.gl/bs88vfj9EPqqym1D7" target="_blank" class="mt-2 inline-block text-earth-terracotta font-bold text-[10px] uppercase tracking-widest border-b border-earth-terracotta/30 pb-1">Ver en Google Maps</a>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Sección Lluvia de Sobres -->
-    <section class="py-16 bg-white flex flex-col items-center border-b border-stone-100">
-        <div class="max-w-xl mx-auto text-center reveal">
-            <i class="fa-solid fa-envelope-open-text text-4xl text-gold-bright mb-4 opacity-80"></i>
-            <h2 class="font-classic text-2xl text-earth-dark tracking-[0.3em] uppercase font-bold text-center">LLUVIA DE SOBRES</h2>
-            <div class="h-[1px] w-24 bg-gold-bright mx-auto mt-4"></div>
+    <!-- Lluvia de Sobres -->
+    <section class="py-16 bg-soft-cream px-6 text-center border-y border-stone-100">
+        <div class="max-w-xl mx-auto reveal">
+            <i class="fa-solid fa-envelope-open-text text-3xl text-gold-bright mb-4 opacity-60"></i>
+            <h2 class="font-classic text-lg text-earth-dark tracking-[0.2em] uppercase font-bold">Lluvia de Sobres</h2>
+            <div class="h-[1px] w-16 bg-gold-bright mx-auto mt-3 mb-4"></div>
+            <p class="font-serif text-base text-stone-500 italic px-4">"Su presencia es nuestro mayor regalo. Si desea tener un detalle, contaremos con un buzón en la entrada."</p>
         </div>
     </section>
 
     <!-- Confirmación -->
-    <section id="confirmar" class="py-24 px-6 text-center bg-earth-dark text-white relative">
+    <section id="confirmar" class="py-20 px-6 text-center bg-earth-dark text-white relative">
         <div class="max-w-2xl mx-auto reveal z-10 relative">
-            <h2 class="font-script text-7xl text-gold-bright mb-6">¡Los Esperamos!</h2>
-            <p class="font-serif text-xl text-soft-cream/80 mb-10 leading-relaxed">Será un honor compartir este testimonio de fidelidad con nuestros seres queridos.</p>
+            <h2 class="font-script text-6xl text-gold-bright mb-4">¡Los Esperamos!</h2>
+            <p class="font-serif text-lg text-soft-cream/70 mb-10">Será un honor compartir este día con ustedes.</p>
             
-            <a href="https://wa.me/tunúmero" class="inline-flex items-center gap-3 bg-gold-bright text-earth-dark px-12 py-5 rounded-full text-lg font-classic hover:bg-white transition shadow-xl transform hover:-translate-y-1 font-bold tracking-widest uppercase">
-                <i class="fa-brands fa-whatsapp text-2xl"></i>
-                Confirmar Asistencia
+            <a href="https://wa.me/tunúmero" class="w-full md:w-auto inline-flex items-center justify-center gap-3 bg-gold-bright text-earth-dark px-8 py-5 rounded-xl text-sm font-classic transition shadow-xl font-bold tracking-widest uppercase active:scale-95">
+                <i class="fa-brands fa-whatsapp text-xl"></i>
+                Confirmar por WhatsApp
             </a>
-            <p class="mt-8 text-[10px] uppercase tracking-[0.3em] text-white/40 italic">Límite de confirmación: 10 de marzo</p>
+            <p class="mt-8 text-[9px] uppercase tracking-[0.2em] text-white/30">Por favor confirmar antes del 10 de marzo</p>
         </div>
     </section>
 
-    <footer class="py-12 bg-white text-center border-t border-stone-200">
-        <p class="font-classic text-gold-bright tracking-[0.5em] mb-4 text-sm font-bold uppercase">Audias & Gloria</p>
-        <div class="h-[1px] w-12 bg-stone-200 mx-auto mb-4"></div>
-        <p class="font-serif text-stone-400 italic text-sm">Cincuenta Años</p>
-        <p class="text-[9px] text-stone-400 font-body uppercase tracking-[0.4em] mt-4 opacity-50">1976 — 2026</p>
+    <footer class="py-10 bg-white text-center">
+        <p class="font-classic text-gold-bright tracking-[0.4em] mb-3 text-xs font-bold uppercase">Audias & Gloria</p>
+        <div class="h-[1px] w-10 bg-stone-200 mx-auto mb-3"></div>
+        <p class="font-serif text-stone-400 italic text-xs">Cincuenta Años de Bendiciones</p>
+        <p class="text-[8px] text-stone-300 font-body uppercase tracking-[0.3em] mt-6">1976 — 2026</p>
     </footer>
 
     <script>
-        // --- Countdown Logic ---
+        // Countdown
         const eventDate = new Date("March 27, 2026 19:00:00").getTime();
-
         function updateCountdown() {
             const now = new Date().getTime();
             const distance = eventDate - now;
-
             const days = Math.floor(distance / (1000 * 60 * 60 * 24));
             const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
             const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
             const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-            if (document.getElementById("days")) {
-                document.getElementById("days").innerText = days < 10 ? "0" + days : days;
-                document.getElementById("hours").innerText = hours < 10 ? "0" + hours : hours;
-                document.getElementById("minutes").innerText = minutes < 10 ? "0" + minutes : minutes;
-                document.getElementById("seconds").innerText = seconds < 10 ? "0" + seconds : seconds;
-            }
+            document.getElementById("days").innerText = days < 10 ? "0" + days : days;
+            document.getElementById("hours").innerText = hours < 10 ? "0" + hours : hours;
+            document.getElementById("minutes").innerText = minutes < 10 ? "0" + minutes : minutes;
+            document.getElementById("seconds").innerText = seconds < 10 ? "0" + seconds : seconds;
 
             if (distance < 0) {
                 clearInterval(countdownInterval);
-                document.getElementById("countdown").innerHTML = "<p class='font-classic text-gold-bright uppercase tracking-widest'>¡Es hoy!</p>";
+                document.getElementById("countdown").innerHTML = "<p class='font-classic text-gold-bright uppercase tracking-widest text-sm'>¡Hoy es el gran día!</p>";
             }
         }
-
         const countdownInterval = setInterval(updateCountdown, 1000);
         updateCountdown();
 
-        // --- Slider Logic ---
+        // Slider
         let slideIndex = 0;
         const slides = document.querySelectorAll(".slide");
-
         function changeSlide(n) {
             slides[slideIndex].classList.remove('active');
             slideIndex = (slideIndex + n + slides.length) % slides.length;
             slides[slideIndex].classList.add('active');
         }
+        setInterval(() => { changeSlide(1); }, 5000);
 
-        setInterval(() => { changeSlide(1); }, 6000);
-
-        // --- Reveal animation ---
+        // Scroll Reveal
         function reveal() {
-            var reveals = document.querySelectorAll(".reveal");
-            for (var i = 0; i < reveals.length; i++) {
-                var windowHeight = window.innerHeight;
-                var elementTop = reveals[i].getBoundingClientRect().top;
-                if (elementTop < windowHeight - 100) {
-                    reveals[i].classList.add("active");
-                }
-            }
+            const reveals = document.querySelectorAll(".reveal");
+            reveals.forEach(el => {
+                const windowHeight = window.innerHeight;
+                const elementTop = el.getBoundingClientRect().top;
+                if (elementTop < windowHeight - 50) el.classList.add("active");
+            });
         }
         window.addEventListener("scroll", reveal);
 
-        // --- Petal animation ---
+        // Pétalos
         function createPetal() {
             const container = document.getElementById('petals-container');
             if(!container) return;
             const petal = document.createElement('div');
             petal.classList.add('petal');
-            const size = Math.random() * 12 + 8 + 'px';
+            const size = Math.random() * 8 + 6 + 'px';
             petal.style.width = size;
             petal.style.height = size;
             petal.style.left = Math.random() * 100 + 'vw';
-            petal.style.animationDuration = Math.random() * 5 + 7 + 's';
+            petal.style.animationDuration = Math.random() * 4 + 6 + 's';
             petal.style.backgroundColor = ['#fce4ec', '#fff9f0', '#ffffff'][Math.floor(Math.random()*3)];
             container.appendChild(petal);
-            setTimeout(() => { petal.remove(); }, 12000);
+            setTimeout(() => { petal.remove(); }, 10000);
         }
 
         window.onload = function() {
             reveal();
-            setInterval(createPetal, 800);
+            setInterval(createPetal, 1000);
         };
     </script>
 </body>

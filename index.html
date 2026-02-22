@@ -405,5 +405,64 @@
             setInterval(createPetal, 1000);
         }
     </script>
+    <div id="music-player" class="fixed bottom-6 right-6 z-[10000] flex items-center gap-3 bg-white/90 backdrop-blur-sm p-3 rounded-full shadow-2xl border border-gold-bright/30 transition-all duration-500 hover:scale-105">
+    <div id="music-icon" class="w-10 h-10 bg-gold-bright rounded-full flex items-center justify-center text-white shadow-lg">
+        <i class="fa-solid fa-music"></i>
+    </div>
+    
+    <div class="flex flex-col pr-4">
+        <span class="text-[10px] uppercase tracking-widest font-bold text-stone-400">Nuestra Música</span>
+        <button id="music-toggle" class="font-classic text-xs text-earth-dark font-bold uppercase tracking-tighter hover:text-earth-terracotta transition-colors flex items-center gap-2">
+            <span id="player-status">Reproducir</span>
+            <i id="play-icon" class="fa-solid fa-play"></i>
+        </button>
+    </div>
+
+    <audio id="bg-audio" loop>
+        <source src="TU_ARCHIVO_DE_AUDIO.mp3" type="audio/mpeg">
+        Tu navegador no soporta el elemento de audio.
+    </audio>
+</div>
+
+<style>
+    /* Animación para el icono cuando suena la música */
+    .music-playing {
+        animation: pulse-gold 2s infinite;
+    }
+
+    @keyframes pulse-gold {
+        0% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.7); }
+        70% { box-shadow: 0 0 0 10px rgba(212, 175, 55, 0); }
+        100% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0); }
+    }
+</style>
+
+<script>
+    const audio = document.getElementById('bg-audio');
+    const musicToggle = document.getElementById('music-toggle');
+    const musicIcon = document.getElementById('music-icon');
+    const playerStatus = document.getElementById('player-status');
+    const playIcon = document.getElementById('play-icon');
+
+    let isPlaying = false;
+
+    musicToggle.addEventListener('click', () => {
+        if (isPlaying) {
+            audio.pause();
+            playerStatus.innerText = "Reproducir";
+            playIcon.classList.replace('fa-pause', 'fa-play');
+            musicIcon.classList.remove('music-playing');
+        } else {
+            audio.play();
+            playerStatus.innerText = "Pausar";
+            playIcon.classList.replace('fa-play', 'fa-pause');
+            musicIcon.classList.add('music-playing');
+        }
+        isPlaying = !isPlaying;
+    });
+
+    // Nota: La mayoría de navegadores bloquean el autoplay. 
+    // El usuario debe interactuar primero (hacer clic en reproducir).
+</script>
 </body>
 </html>

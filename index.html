@@ -31,10 +31,20 @@
         }
     </script>
     <style>
-        .hero-bg {
-            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('imagen12.jpeg');
-            background-size: cover;
-            background-position: center;
+           .hero-bg {
+            background-color: #3D342F; /* Fondo oscuro elegante por si la foto deja bordes */
+            background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('imagen12.jpeg');
+            background-size: cover, cover;
+            background-position: center, center;
+            background-repeat: no-repeat, no-repeat;
+        }
+
+        /* Ajuste automático solo para pantallas de celular */
+        @media (max-width: 768px) {
+            .hero-bg {
+                /* El filtro oscuro cubre toda la pantalla, pero la foto se encoge para verse 100% completa */
+                background-size: cover, contain; 
+            }
         }
         .reveal {
             opacity: 0;

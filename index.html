@@ -32,7 +32,7 @@
     </script>
     <style>
         .hero-bg {
-            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1529636798458-92182e662485?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('imagen12.jpeg');
             background-size: cover;
             background-position: center;
         }
@@ -152,7 +152,6 @@
 
     <div id="petals-container"></div>
 
-    <!-- Hero -->
     <section id="inicio" class="h-screen flex items-center justify-center relative overflow-hidden hero-bg px-4">
         <div class="text-center text-white z-10 flex flex-col items-center w-full">
             <div class="font-classic text-[6.5rem] md:text-[12rem] leading-none gold-shimmer drop-shadow-2xl font-bold">50</div>
@@ -171,7 +170,6 @@
         </div>
     </section>
 
-    <!-- Temporizador -->
     <section class="py-10 bg-white flex justify-center border-b border-stone-100 px-4">
         <div class="max-w-4xl w-full reveal">
             <div class="text-center mb-6">
@@ -201,7 +199,6 @@
         </div>
     </section>
 
-    <!-- Camino de Fe -->
     <section id="camino" class="py-16 px-6 bg-white text-center">
         <div class="max-w-2xl mx-auto reveal">
             <div class="flex flex-col items-center mb-8">
@@ -218,22 +215,28 @@
         </div>
     </section>
 
-    <!-- SECCIÓN DE CARRUSEL CON MÁRGENES Y DECORACIÓN DORADA -->
     <section class="carousel-frame-container">
         <div class="photo-frame reveal">
-            <!-- Esquinas decorativas -->
             <div class="frame-corner corner-tl"></div>
             <div class="frame-corner corner-tr"></div>
             <div class="frame-corner corner-bl"></div>
             <div class="frame-corner corner-br"></div>
             
             <div class="gold-border-inner">
-                <!-- Slides -->
-                <div class="slide-frame active" style="background-image: url('https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');"></div>
-                <div class="slide-frame" style="background-image: url('https://images.unsplash.com/photo-1469334031218-e382a71b716b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');"></div>
-                <div class="slide-frame" style="background-image: url('https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');"></div>
+                <div class="slide-frame active" style="background-image: url('imagen1.jpeg');"></div>
+                <div class="slide-frame" style="background-image: url('imagen2.jpeg');"></div>
+                <div class="slide-frame" style="background-image: url('imagen3.jpeg');"></div>
+                <div class="slide-frame" style="background-image: url('imagen4.jpeg');"></div>
+                <div class="slide-frame" style="background-image: url('imagen5.jpeg');"></div>
+                <div class="slide-frame" style="background-image: url('imagen6.jpeg');"></div>
+                <div class="slide-frame" style="background-image: url('imagen7.jpeg');"></div>
+                <div class="slide-frame" style="background-image: url('imagen8.jpeg');"></div>
+                <div class="slide-frame" style="background-image: url('imagen9.jpeg');"></div>
+                <div class="slide-frame" style="background-image: url('imagen10.jpeg');"></div>
+                <div class="slide-frame" style="background-image: url('imagen11.jpeg');"></div>
+                <div class="slide-frame" style="background-image: url('imagen13.jpeg');"></div>
+                <div class="slide-frame" style="background-image: url('imagen14.jpeg');"></div>
                 
-                <!-- Botones de navegación -->
                 <button onclick="changePhoto(-1)" class="absolute left-2 top-1/2 -translate-y-1/2 z-40 bg-white/80 text-earth-terracotta w-8 h-8 rounded-full shadow-md flex items-center justify-center hover:bg-gold-bright hover:text-white transition-colors">
                     <i class="fa-solid fa-chevron-left text-xs"></i>
                 </button>
@@ -242,14 +245,12 @@
                 </button>
             </div>
             
-            <!-- Pie de la foto -->
             <div class="text-center pt-4">
                 <p class="font-script text-2xl text-earth-terracotta">Recuerdos Inolvidables</p>
             </div>
         </div>
     </section>
 
-    <!-- Versículo -->
     <section class="py-16 px-6 bg-soft-cream">
         <div class="max-w-xl mx-auto text-center reveal">
             <div class="bg-white p-8 md:p-12 rounded-2xl shadow-sm border border-stone-100">
@@ -262,7 +263,6 @@
         </div>
     </section>
 
-    <!-- Detalles del Evento -->
     <section id="evento" class="py-16 bg-white px-6">
         <div class="max-w-5xl mx-auto">
             <div class="text-center mb-12 reveal">
@@ -271,7 +271,6 @@
             </div>
             
             <div class="grid grid-cols-1 gap-6">
-                <!-- Fecha -->
                 <div class="bg-earth-bg p-6 rounded-xl reveal flex items-center gap-5 border-l-4 border-gold-bright">
                     <div class="bg-white w-12 h-12 rounded-full flex items-center justify-center text-gold-bright shadow-sm shrink-0">
                         <i class="fa-regular fa-calendar-check text-xl"></i>
@@ -282,7 +281,6 @@
                     </div>
                 </div>
 
-                <!-- Hora -->
                 <div class="bg-earth-bg p-6 rounded-xl reveal flex items-center gap-5 border-l-4 border-earth-terracotta">
                     <div class="bg-white w-12 h-12 rounded-full flex items-center justify-center text-earth-terracotta shadow-sm shrink-0">
                         <i class="fa-regular fa-clock text-xl"></i>
@@ -293,7 +291,6 @@
                     </div>
                 </div>
 
-                <!-- Lugar -->
                 <div class="bg-earth-bg p-6 rounded-xl reveal flex items-center gap-5 border-l-4 border-earth-sand">
                     <div class="bg-white w-12 h-12 rounded-full flex items-center justify-center text-earth-sand shadow-sm shrink-0">
                         <i class="fa-solid fa-location-dot text-xl"></i>
@@ -309,7 +306,6 @@
         </div>
     </section>
 
-    <!-- Lluvia de Sobres -->
     <section class="py-16 bg-soft-cream px-6 text-center border-y border-stone-100">
         <div class="max-w-xl mx-auto reveal">
             <i class="fa-solid fa-envelope-open-text text-3xl text-gold-bright mb-4 opacity-60"></i>
@@ -318,7 +314,6 @@
         </div>
     </section>
 
-    <!-- Confirmación -->
     <section id="confirmar" class="py-20 px-6 text-center bg-earth-dark text-white relative">
         <div class="max-w-2xl mx-auto reveal z-10 relative">
             <h2 class="font-script text-6xl text-gold-bright mb-4">¡Los Esperamos!</h2>

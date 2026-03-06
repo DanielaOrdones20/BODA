@@ -334,6 +334,38 @@
         <p class="text-[8px] text-stone-300 font-body uppercase tracking-[0.3em] mt-6">1976 — 2026</p>
     </footer>
 
+    <div id="music-player" class="fixed bottom-6 right-6 z-[10000] flex items-center gap-3 bg-white/90 backdrop-blur-sm p-3 rounded-full shadow-2xl border border-gold-bright/30 transition-all duration-500 hover:scale-105">
+        <div id="music-icon" class="w-10 h-10 bg-gold-bright rounded-full flex items-center justify-center text-white shadow-lg">
+            <i class="fa-solid fa-music"></i>
+        </div>
+        
+        <div class="flex flex-col pr-4">
+            <span class="text-[10px] uppercase tracking-widest font-bold text-stone-400">Nuestra Música</span>
+            <button id="music-toggle" class="font-classic text-xs text-earth-dark font-bold uppercase tracking-tighter hover:text-earth-terracotta transition-colors flex items-center gap-2">
+                <span id="player-status">Reproducir</span>
+                <i id="play-icon" class="fa-solid fa-play"></i>
+            </button>
+        </div>
+
+        <audio id="bg-audio" loop>
+            <source src="boda.mpeg" type="audio/mpeg">
+            Tu navegador no soporta el elemento de audio.
+        </audio>
+    </div>
+
+    <style>
+        /* Animación para el icono cuando suena la música */
+        .music-playing {
+            animation: pulse-gold 2s infinite;
+        }
+
+        @keyframes pulse-gold {
+            0% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(212, 175, 55, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0); }
+        }
+    </style>
+
     <script>
         // Countdown
         const eventDate = new Date("March 27, 2026 19:00:00").getTime();
@@ -345,14 +377,17 @@
             const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
             const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-            document.getElementById("days").innerText = days < 10 ? "0" + days : days;
-            document.getElementById("hours").innerText = hours < 10 ? "0" + hours : hours;
-            document.getElementById("minutes").innerText = minutes < 10 ? "0" + minutes : minutes;
-            document.getElementById("seconds").innerText = seconds < 10 ? "0" + seconds : seconds;
+            if(document.getElementById("days")) {
+                document.getElementById("days").innerText = days < 10 ? "0" + days : days;
+                document.getElementById("hours").innerText = hours < 10 ? "0" + hours : hours;
+                document.getElementById("minutes").innerText = minutes < 10 ? "0" + minutes : minutes;
+                document.getElementById("seconds").innerText = seconds < 10 ? "0" + seconds : seconds;
+            }
 
             if (distance < 0) {
                 clearInterval(countdownInterval);
-                document.getElementById("countdown").innerHTML = "<p class='font-classic text-gold-bright uppercase tracking-widest text-sm'>¡Hoy es el gran día!</p>";
+                const cd = document.getElementById("countdown");
+                if(cd) cd.innerHTML = "<p class='font-classic text-gold-bright uppercase tracking-widest text-sm'>¡Hoy es el gran día!</p>";
             }
         }
         const countdownInterval = setInterval(updateCountdown, 1000);
@@ -362,11 +397,14 @@
         let photoIndex = 0;
         const photoSlides = document.querySelectorAll(".slide-frame");
         function changePhoto(n) {
+            if(photoSlides.length === 0) return;
             photoSlides[photoIndex].classList.remove('active');
             photoIndex = (photoIndex + n + photoSlides.length) % photoSlides.length;
             photoSlides[photoIndex].classList.add('active');
         }
-        setInterval(() => { changePhoto(1); }, 5000);
+        if(photoSlides.length > 0) {
+            setInterval(() => { changePhoto(1); }, 5000);
+        }
 
         // Scroll Reveal
         function reveal() {
@@ -379,7 +417,7 @@
         }
         window.addEventListener("scroll", reveal);
 
-        // Pétalos
+        // Pétalos (Lógica reinstalada)
         function createPetal() {
             const container = document.getElementById('petals-container');
             if(!container) return;
@@ -395,66 +433,41 @@
             setTimeout(() => { petal.remove(); }, 10000);
         }
 
+        // Lógica del reproductor de música (reinstalada)
+        const audio = document.getElementById('bg-audio');
+        const musicToggle = document.getElementById('music-toggle');
+        const musicIcon = document.getElementById('music-icon');
+        const playerStatus = document.getElementById('player-status');
+        const playIcon = document.getElementById('play-icon');
+
+        let isPlaying = false;
+
+        if(musicToggle && audio) {
+            musicToggle.addEventListener('click', () => {
+                if (isPlaying) {
+                    audio.pause();
+                    playerStatus.innerText = "Reproducir";
+                    playIcon.classList.replace('fa-pause', 'fa-play');
+                    musicIcon.classList.remove('music-playing');
+                } else {
+                    audio.play().catch(e => console.log("Error al reproducir:", e));
+                    playerStatus.innerText = "Pausar";
+                    playIcon.classList.replace('fa-play', 'fa-pause');
+                    musicIcon.classList.add('music-playing');
+                }
+                isPlaying = !isPlaying;
+            });
+        }
+
+        // Window onload unificado
         window.onload = function() {
             reveal();
+            // Activar pétalos
             setInterval(createPetal, 1000);
+            // Intento de autoreproducir (a menudo bloqueado por navegadores, requiere interacción)
+            // audio.play().then(() => { isPlaying = true; ... }).catch(() => {});
         }
     </script>
-    <div id="music-player" class="fixed bottom-6 right-6 z-[10000] flex items-center gap-3 bg-white/90 backdrop-blur-sm p-3 rounded-full shadow-2xl border border-gold-bright/30 transition-all duration-500 hover:scale-105">
-    <div id="music-icon" class="w-10 h-10 bg-gold-bright rounded-full flex items-center justify-center text-white shadow-lg">
-        <i class="fa-solid fa-music"></i>
-    </div>
-    
-    <div class="flex flex-col pr-4">
-        <span class="text-[10px] uppercase tracking-widest font-bold text-stone-400">Nuestra Música</span>
-        <button id="music-toggle" class="font-classic text-xs text-earth-dark font-bold uppercase tracking-tighter hover:text-earth-terracotta transition-colors flex items-center gap-2">
-            <span id="player-status">Reproducir</span>
-            <i id="play-icon" class="fa-solid fa-play"></i>
-        </button>
-    </div>
-
-    <audio id="bg-audio" loop>
-        <source src="boda.mpeg" type="audio/mpeg">
-        Tu navegador no soporta el elemento de audio.
-    </audio>
-</div>
-
-<style>
-    /* Animación para el icono cuando suena la música */
-    .music-playing {
-        animation: pulse-gold 2s infinite;
-    }
-
-    @keyframes pulse-gold {
-        0% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.7); }
-        70% { box-shadow: 0 0 0 10px rgba(212, 175, 55, 0); }
-        100% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0); }
-    }
-</style>
-
-<script>
-    const audio = document.getElementById('bg-audio');
-    const musicToggle = document.getElementById('music-toggle');
-    const musicIcon = document.getElementById('music-icon');
-    const playerStatus = document.getElementById('player-status');
-    const playIcon = document.getElementById('play-icon');
-
-    let isPlaying = false;
-
-    musicToggle.addEventListener('click', () => {
-        if (isPlaying) {
-            audio.pause();
-            playerStatus.innerText = "Reproducir";
-            playIcon.classList.replace('fa-pause', 'fa-play');
-            musicIcon.classList.remove('music-playing');
-        } else {
-            audio.play();
-            playerStatus.innerText = "Pausar";
-            playIcon.classList.replace('fa-play', 'fa-pause');
-            musicIcon.classList.add('music-playing');
-        }
-        isPlaying = !isPlaying;
-    });
-</script>
 </body>
+</html>
 </html>

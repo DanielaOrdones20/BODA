@@ -31,20 +31,10 @@
         }
     </script>
     <style>
-           .hero-bg {
-            background-color: #3D342F; /* Fondo oscuro elegante por si la foto deja bordes */
-            background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('imagen12.jpeg');
-            background-size: cover, cover;
-            background-position: center, center;
-            background-repeat: no-repeat, no-repeat;
-        }
-
-        /* Ajuste automático solo para pantallas de celular */
-        @media (max-width: 768px) {
-            .hero-bg {
-                /* El filtro oscuro cubre toda la pantalla, pero la foto se encoge para verse 100% completa */
-                background-size: cover, contain; 
-            }
+        .hero-bg {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('imagen9.jpeg');
+            background-size: cover;
+            background-position: center;
         }
         .reveal {
             opacity: 0;
@@ -85,7 +75,8 @@
             position: relative;
             border: 2px solid #D4AF37;
             overflow: hidden;
-            aspect-ratio: 4/3;
+            /* Cambiamos 4/3 por 3/4 (o 9/16) para hacerlo vertical */
+            aspect-ratio: 3/4; 
         }
         /* Decoraciones en las esquinas */
         .frame-corner {
